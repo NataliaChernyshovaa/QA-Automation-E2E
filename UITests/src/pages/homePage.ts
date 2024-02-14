@@ -12,4 +12,8 @@ export class HomePage extends BasePage {
     public get getInToutchButton () {
         return this.page.locator('#main-menu a:has-text("Get in touch")')
       }
+
+    public get  ESGKPIEngineLink () {
+        return this.page.locator('span.ux-menu-link__text:has-text("ESG KPI Engine")')
+    }
 }

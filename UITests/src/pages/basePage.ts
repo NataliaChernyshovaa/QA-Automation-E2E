@@ -1,15 +1,20 @@
 import { type Page } from '@playwright/test'
+import { NavigationBar } from './sections/navigationBar';
 
 
 export class BasePage {
   protected url!: string;
-  protected page: Page;
+  public navigationBar: NavigationBar
 
-  constructor(page: Page) {
-    this.page = page;
+  constructor (protected readonly page: Page) {
+    this.navigationBar = new NavigationBar(page)
   }
+
 
   public async visitPage () {
     await this.page.goto(this.url)
+  }
+  public async getUrl () {
+    return this.page.url()
   }
 }
