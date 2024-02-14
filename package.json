@@ -2,9 +2,9 @@
   "name": "qa-automation-challenge",
   "version": "1.0.0",
   "description": "AQA test task",
-  "main": "index.ts",
+  "main": "README.md",
   "scripts": {
-    "aqa:test": "ts-node index.ts"
+    "playwright:test": "playwright test --config=./UITests/configs/playwright.config.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/NataliaChernyshovaa/QA-Automation-Challenge#readme",
   "devDependencies": {
     "@playwright/test": "^1.41.2",
+    "@types/jest": "^29.5.12",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
