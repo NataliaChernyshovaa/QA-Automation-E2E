@@ -2,9 +2,9 @@
   "name": "qa-automation-challenge",
   "version": "1.0.0",
   "description": "AQA test task",
-  "main": "README.md",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "aqa:test": "ts-node index.ts"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/NataliaChernyshovaa/QA-Automation-Challenge/issues"
   },
-  "homepage": "https://github.com/NataliaChernyshovaa/QA-Automation-Challenge#readme"
+  "homepage": "https://github.com/NataliaChernyshovaa/QA-Automation-Challenge#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
 }
