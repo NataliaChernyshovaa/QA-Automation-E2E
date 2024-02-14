@@ -1,0 +1,24 @@
+{
+  "name": "qa-automation-challenge",
+  "version": "1.0.0",
+  "description": "AQA test task",
+  "main": "README.md",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NataliaChernyshovaa/QA-Automation-Challenge.git"
+  },
+  "keywords": [
+    "AQA",
+    "tests",
+    "PlayWright"
+  ],
+  "author": "Natalia Chernyshovaa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NataliaChernyshovaa/QA-Automation-Challenge/issues"
+  },
+  "homepage": "https://github.com/NataliaChernyshovaa/QA-Automation-Challenge#readme"
+}
