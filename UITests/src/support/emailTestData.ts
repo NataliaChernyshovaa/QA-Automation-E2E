@@ -1,0 +1,1 @@
+export const unvalidEmail = '342323'

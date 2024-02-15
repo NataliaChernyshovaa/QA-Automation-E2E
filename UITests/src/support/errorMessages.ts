@@ -1,0 +1,1 @@
+export const errorValidatinEmailMessage = 'Email must be formatted correctly.'

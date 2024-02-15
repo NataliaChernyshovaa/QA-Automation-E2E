@@ -1,0 +1,30 @@
+{
+  "name": "qa-automation-challenge",
+  "version": "1.0.0",
+  "description": "AQA test task",
+  "main": "README.md",
+  "scripts": {
+    "playwright:test": "playwright test --config=./UITests/configs/playwright.config.ts",
+    "playwright:report": "playwright show-report UITests/assets/report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NataliaChernyshovaa/QA-Automation-Challenge.git"
+  },
+  "keywords": [
+    "AQA",
+    "tests",
+    "PlayWright"
+  ],
+  "author": "Natalia Chernyshovaa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NataliaChernyshovaa/QA-Automation-Challenge/issues"
+  },
+  "homepage": "https://github.com/NataliaChernyshovaa/QA-Automation-Challenge#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.41.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
