@@ -5,14 +5,17 @@ import { contactUrl, esgKpiEngineUrl } from '../src/support/constants';
 import { ContactFormPage } from '../src/pages/contactFormPage';
 import { unvalidEmail } from '../src/support/emailTestData';
 import { errorValidatinEmailMessage } from '../src/support/errorMessages';
+import { ESGKPIEnginePage } from '../src/pages/ESGKPIEnginePage';
 
 test.describe('Official Site Tests', () => {
     let homePage: HomePage;
     let contactFormPage: ContactFormPage
+    let esgkpiEnginePage : ESGKPIEnginePage
   
     test.beforeEach(async ({ page }) => {
       homePage = new HomePage(page)
       contactFormPage = new ContactFormPage(page)
+      esgkpiEnginePage = new ESGKPIEnginePage(page)
   
       await homePage.visitPage()
     })
@@ -35,14 +38,15 @@ test.describe('Official Site Tests', () => {
         await homePage.ESGKPIEngineLink.click()
       
         expect(await homePage.getUrl()).toBe(esgKpiEngineUrl);
+        expect (esgkpiEnginePage.h1ElementESGKPIEngine).toBeVisible
       });
 
       test (`Should Verify if validation message will appear if email is unvalid`, async () => {
         await homePage.getInToutchButton.click();
-        expect(await homePage.getUrl()).toBe(contactUrl);
+        expect(await contactFormPage.getUrl()).toBe(contactUrl);
         
-        await contactFormPage.frame.locator(contactFormPage.emailField).fill(unvalidEmail)
-        await expect (contactFormPage.frame.locator(contactFormPage.emailErrorLabel)).toContainText(errorValidatinEmailMessage)
+        await contactFormPage.emailField.fill(unvalidEmail)
+        await expect (contactFormPage.emailErrorLabel).toContainText(errorValidatinEmailMessage)
       }); 
  
   })

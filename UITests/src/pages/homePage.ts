@@ -10,7 +10,7 @@ export class HomePage extends BasePage {
     }
 
     public get getInToutchButton () {
-        return this.page.locator('a.button.primary[href="/contact/"][style="border-radius:99px;"]').first()
+        return this.page.locator('header a[href="/contact/"]')
       }
 
     public get  ESGKPIEngineLink () {
