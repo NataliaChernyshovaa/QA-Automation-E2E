@@ -1,13 +1,18 @@
 import test, { expect } from '@playwright/test'
 import { HomePage } from "../src/pages/homePage";
 import { NAVIGATION_ITEMS } from '../src/support/types';
-import { esgKpiEngineUrl } from '../src/support/constants';
+import { contactUrl, esgKpiEngineUrl } from '../src/support/constants';
+import { ContactFormPage } from '../src/pages/contactFormPage';
+import { unvalidEmail } from '../src/support/emailTestData';
+import { errorValidatinEmailMessage } from '../src/support/errorMessages';
 
 test.describe('Official Site Tests', () => {
     let homePage: HomePage;
+    let contactFormPage: ContactFormPage
   
     test.beforeEach(async ({ page }) => {
       homePage = new HomePage(page)
+      contactFormPage = new ContactFormPage(page)
   
       await homePage.visitPage()
     })
@@ -31,5 +36,13 @@ test.describe('Official Site Tests', () => {
       
         expect(await homePage.getUrl()).toBe(esgKpiEngineUrl);
       });
+
+      test (`Should Verify if validation message will appear if email is unvalid`, async () => {
+        await homePage.getInToutchButton.click();
+        expect(await homePage.getUrl()).toBe(contactUrl);
+        
+        await contactFormPage.frame.locator(contactFormPage.emailField).fill(unvalidEmail)
+        await expect (contactFormPage.frame.locator(contactFormPage.emailErrorLabel)).toContainText(errorValidatinEmailMessage)
+      }); 
  
   })

@@ -10,7 +10,7 @@ export class HomePage extends BasePage {
     }
 
     public get getInToutchButton () {
-        return this.page.locator('#main-menu a:has-text("Get in touch")')
+        return this.page.locator('a.button.primary[href="/contact/"][style="border-radius:99px;"]').first()
       }
 
     public get  ESGKPIEngineLink () {
