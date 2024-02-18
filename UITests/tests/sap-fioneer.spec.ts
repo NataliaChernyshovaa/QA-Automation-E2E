@@ -1,30 +1,18 @@
-import test, { expect } from '@playwright/test'
-import { HomePage } from "../src/pages/homePage";
+import  { test } from "../src/fixture/fixture"
+import { expect } from '@playwright/test'
 import { NAVIGATION_ITEMS } from '../src/support/types';
 import { contactUrl, esgKpiEngineUrl } from '../src/support/constants';
-import { ContactFormPage } from '../src/pages/contactFormPage';
 import { unvalidEmail } from '../src/support/emailTestData';
 import { errorValidatinEmailMessage } from '../src/support/errorMessages';
-import { ESGKPIEnginePage } from '../src/pages/ESGKPIEnginePage';
+
 
 test.describe('Official Site Tests', () => {
-    let homePage: HomePage;
-    let contactFormPage: ContactFormPage
-    let esgkpiEnginePage : ESGKPIEnginePage
   
-    test.beforeEach(async ({ page }) => {
-      homePage = new HomePage(page)
-      contactFormPage = new ContactFormPage(page)
-      esgkpiEnginePage = new ESGKPIEnginePage(page)
-  
+    test.beforeEach(async ({ homePage }) => {
       await homePage.visitPage()
     })
   
-    test.afterEach(async ({ page }) => {
-      await page.close()
-    })
-  
-    test('Should verify if Get in touch button has a yellow color', async () => {
+    test('Should verify if Get in touch button has a yellow color', async ( {homePage} ) => {
         const color = await homePage.getInToutchButton.evaluate((item) => {
         return window.getComputedStyle(item).getPropertyValue("background-color")
       })
@@ -33,7 +21,7 @@ test.describe('Official Site Tests', () => {
 
     });
 
-    test (`Should verify if a user has been redirected to the ${esgKpiEngineUrl} page`, async () => {
+    test (`Should verify if a user has been redirected to the ${esgKpiEngineUrl} page`, async ( {homePage, esgkpiEnginePage} ) => {
         await homePage.navigationBar.getNavigationItemByText(NAVIGATION_ITEMS.FINANCE_ESG).hover()
         await homePage.ESGKPIEngineLink.click()
       
@@ -41,7 +29,7 @@ test.describe('Official Site Tests', () => {
         expect (esgkpiEnginePage.h1ElementESGKPIEngine).toBeVisible
       });
 
-      test (`Should Verify if validation message will appear if email is unvalid`, async () => {
+      test (`Should Verify if validation message will appear if email is unvalid`, async ( {homePage, contactFormPage} ) => {
         await homePage.getInToutchButton.click();
         expect(await contactFormPage.getUrl()).toBe(contactUrl);
         
