@@ -17,4 +17,10 @@ export class BasePage {
   public async getUrl () {
     return this.page.url()
   }
+
+  public async close () {
+    await this.page.close()
+  }
 }
+
+
