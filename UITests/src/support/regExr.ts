@@ -1,0 +1,1 @@
+export const blogPageTitle = /.*SAP Fioneer | Blogs, whitepapers and product updates*/

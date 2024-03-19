@@ -21,6 +21,10 @@ export class BasePage {
   public async close () {
     await this.page.close()
   }
+
+  public async getTitle (){
+    return this.page.title()
+  }
 }
 
 

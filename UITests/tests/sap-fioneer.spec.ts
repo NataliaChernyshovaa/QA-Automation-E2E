@@ -4,6 +4,7 @@ import { NAVIGATION_ITEMS } from '../src/support/types';
 import { contactUrl, esgKpiEngineUrl } from '../src/support/constants';
 import { unvalidEmail } from '../src/support/emailTestData';
 import { errorValidatinEmailMessage } from '../src/support/errorMessages';
+import { blogPageTitle } from "../src/support/regExr";
 
 
 test.describe('Official Site Tests', () => {
@@ -12,7 +13,7 @@ test.describe('Official Site Tests', () => {
       await homePage.visitPage()
     })
   
-    test('Should verify if Get in touch button has a yellow color', async ( {homePage} ) => {
+    test ('Should verify if Get in touch button has a yellow color', async ( {homePage} ) => {
         const color = await homePage.getInToutchButton.evaluate((item) => {
         return window.getComputedStyle(item).getPropertyValue("background-color")
       })
@@ -33,8 +34,13 @@ test.describe('Official Site Tests', () => {
         await homePage.getInToutchButton.click();
         expect(await contactFormPage.getUrl()).toBe(contactUrl);
         
-        await contactFormPage.emailField.fill(unvalidEmail)
+        await contactFormPage.emailField.pressSequentially(unvalidEmail)
         await expect (contactFormPage.emailErrorLabel).toContainText(errorValidatinEmailMessage)
       }); 
- 
+
+      test ('Should display title of blogPage correctly', async ({ blogPage }) => {
+        await expect.poll(async () => {
+          return blogPageTitle.test(await blogPage.getTitle());
+        }).toBeTruthy();
+      });
   })
