@@ -1,0 +1,59 @@
+version: 2.1
+
+executors:
+  node-executor:
+    docker:
+      - image: node:20
+
+jobs:
+  lint-code:
+    executor: node-executor
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Run Prettier
+          command: npx prettier --check "UITests/tests/**/*.{js,ts,tsx,jsx,json}"
+
+  run-playwright-tests:
+    executor: node-executor
+    environment:
+      BROWSER: ${BROWSER:-CHROME}
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Install Playwright Dependencies
+          command: npx playwright install-deps
+      - run:
+          name: Install Playwright Browsers
+          command: npx playwright install
+      - run:
+          name: Run Playwright Tests
+          command: npx playwright test --config=./UITests/configs/playwright.config.ts
+      - store_artifacts:
+          path: UITests/assets/report
+      - save_cache:
+          key: v1-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - lint-code
+      - run-playwright-tests:
+          requires:
+            - lint-code
+
