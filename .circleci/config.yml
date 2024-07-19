@@ -32,6 +32,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
           name: Install Playwright Dependencies
           command: npx playwright install-deps
       - run:
