@@ -5,7 +5,8 @@
   "main": "README.md",
   "scripts": {
     "playwright:test": "playwright test --config=./UITests/configs/playwright.config.ts",
-    "playwright:report": "playwright show-report UITests/assets/report"
+    "playwright:report": "playwright show-report UITests/assets/report",
+    "lint-check": "npx prettier --check 'UITests/tests/**/*.{js,ts,tsx,jsx,json}'"
   },
   "repository": {
     "type": "git",
